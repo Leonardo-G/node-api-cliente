@@ -7,7 +7,10 @@ const app = express();
 //Conectar base de datos
 conectarDB();
 
-app.use("api", require("./route/cliente"))
+//habilitar express.json
+app.use(express.json());
+
+app.use("/api/usuarios", require("./route/usuarios"))
 
 //Puerto de la aoo
 const port = process.env.PORT || 4000;
