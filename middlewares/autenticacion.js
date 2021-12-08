@@ -15,6 +15,7 @@ const autenticacion = ( req, res, next ) => {
         req.usuario = cifrado.usuario
         next();
     } catch (error) {
+        console.log(error)
         res.status(401).json({ msg: "Token no válido" })
     }
 }

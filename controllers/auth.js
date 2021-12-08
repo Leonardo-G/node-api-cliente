@@ -26,7 +26,7 @@ const autenticarUsuario = async (req, res) => {
             return res.status(400).json({msg: "Password incorrecto"})
         }
 
-        //Si todo es correcto  crea y firmar el JWT.
+        //Si todo es correcto  crea y firma el JWT.
         const payload = {
             usuario:{
                 id: usuario.id
