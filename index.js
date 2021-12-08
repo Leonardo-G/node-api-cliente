@@ -11,6 +11,7 @@ conectarDB();
 app.use(express.json());
 
 app.use("/api/usuarios", require("./route/usuarios"))
+app.use("/api/auth", require("./route/auth"))
 
 //Puerto de la aoo
 const port = process.env.PORT || 4000;
