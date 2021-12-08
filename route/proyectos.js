@@ -13,6 +13,8 @@ router.get("/", autenticacion, proyectoGet);
 
 router.put("/:id", autenticacion, proyectoPut);
 
-router.delete( "/:id", proyectoDelete )
+router.delete( "/:id", proyectoDelete );
+
+
 
 module.exports = router
