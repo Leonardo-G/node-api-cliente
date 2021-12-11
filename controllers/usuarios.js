@@ -10,7 +10,7 @@ const usuariosPost = async (req, res) => {
     if( !errores.isEmpty() ){
         return res.status(400).json({ errores: errores.array() })
     }
-
+    
     const { nombre, email, password } = req.body;
 
     const isExistEmail = await Usuario.findOne({ email });
