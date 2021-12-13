@@ -59,7 +59,7 @@ const proyectoDelete = async (req, res) => {
     try {
         const isExistProyecto = await Proyecto.findById(req.params.id);
 
-        if(isExistProyecto){
+        if(!isExistProyecto){
             return res.status(404).json({ msg: "Proyecto no encontrado" });
         }
 

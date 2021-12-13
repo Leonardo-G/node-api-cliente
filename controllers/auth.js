@@ -48,7 +48,7 @@ const autenticarUsuario = async (req, res) => {
 
 const usuarioAutenticado = async ( req, res ) => {
     try {
-        const usuario = await Usuario.findById( req,usuario.id );
+        const usuario = await Usuario.findById( req.usuario.id ).select("-password");
         res.json({ usuario })
         
     } catch (error) {

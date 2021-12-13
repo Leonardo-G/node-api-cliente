@@ -13,7 +13,7 @@ router.get("/", autenticacion, proyectoGet);
 
 router.put("/:id", autenticacion, proyectoPut);
 
-router.delete( "/:id", proyectoDelete );
+router.delete( "/:id", autenticacion, proyectoDelete );
 
 
 
