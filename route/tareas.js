@@ -9,7 +9,7 @@ router.post("/", autenticacion, [
     check("proyecto", "El proyecto es obligatorio").not().isEmpty(),
 ], tareaPost);
 
-router.get("/", autenticacion, tareaGet);
+router.get("/:id", autenticacion, tareaGet);
 
 router.put("/:id", autenticacion, tareaPut);
 

@@ -73,7 +73,8 @@ const proyectoDelete = async (req, res) => {
         res.json({ msg: "Proyecto eliminado" })
 
     } catch (error) {
-        console.log(error);
+        console.log(error)
+        res.status(400)
     }
 }
 
