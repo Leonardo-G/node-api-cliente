@@ -23,6 +23,6 @@ app.use("/api/tareas", require("./route/tareas"));
 const port = process.env.PORT || 4000;
 
 //Arrancando la app
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
     console.log("Servidor iniciado", port)
 })
