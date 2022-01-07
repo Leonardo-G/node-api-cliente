@@ -69,6 +69,7 @@ const tareaPut = async ( req, res ) => {
 
         //Guardar la tarea
         const producto = await Tarea.findByIdAndUpdate({_id: req.params.id}, {$set: req.body}, {new:true});
+        console.log(producto)
         res.json(producto);
 
     } catch (error) {
