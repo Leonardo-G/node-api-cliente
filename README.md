@@ -1,6 +1,6 @@
 # Tareas de usuario, Servidor API
 
-Proyecto de Node, donde se creó la api que se utiliza, en la [aplicación de React](https://github.com/Leonardo-G/react-administrador-proyectos), para leer/crear/actualizar/eliminar proyectos, tareas y registrar nuevos usuarios intercambiando informacion a través de Json Web Token.
+Proyecto de Node, donde se creó la api que se utiliza, en la [aplicación de React](https://github.com/Leonardo-G/react-administrador-proyectos), para leer/crear/actualizar/eliminar proyectos, tareas y registrar nuevos usuarios intercambiando informacion a través de Json Web Token, desplegado en Heroku. **Actualmente no desplegado, ya que Heroku ahora es versión paga**
 
 Peticiones disponible:
 
