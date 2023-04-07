@@ -1,5 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config'
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Global()
 @Module({
@@ -7,7 +8,11 @@ import { ConfigModule } from '@nestjs/config'
         ConfigModule.forRoot({
             envFilePath: ".env",
             isGlobal: true
-        })
+        }),
+        MongooseModule.forRoot( process.env.DB_MONGO )
+    ],
+    exports: [
+        MongooseModule
     ]
 })
 export class DatabaseModule {}
