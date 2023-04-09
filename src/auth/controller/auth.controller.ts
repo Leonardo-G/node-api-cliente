@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
-import { RegisterClassDTO } from '../dto/auth.dto';
+import { RegisterClassDTO, UserLoginDTO } from '../dto/auth.dto';
 import { AuthService } from '../service/auth.service';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { ValidUser } from 'src/common/guards/valid-user.guard';
@@ -25,6 +25,11 @@ export class AuthController {
             usuario: user,
             token: this.authService.signToken( user._id )
         }
+    }
+
+    @Post('login')
+    loginUser( @Body() userObject: UserLoginDTO ){
+        return this.authService.loginUser( userObject );
     }
 }
 

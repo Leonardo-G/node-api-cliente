@@ -20,7 +20,7 @@ export class ValidUser implements CanActivate {
         const request = context.switchToHttp().getRequest();
 
         //Comprobar si existe el usuario
-        const user = await this.userModel.findById( request['user'].usuario.id ).select("-password -__v").exec();
+        const user = await this.userModel.findById( request['user'].usuario._id ).select("-password -__v").exec();
         if ( !user ){
             throw new BadRequestException("Permisos no permitido");
         }

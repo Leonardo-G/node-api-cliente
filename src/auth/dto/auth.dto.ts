@@ -16,3 +16,14 @@ export class RegisterClassDTO {
     @MinLength(6)
     password: string;
 }
+
+export class UserLoginDTO {
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(6)
+    password: string;
+}
