@@ -1,6 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { RegisterClassDTO } from '../dto/auth.dto';
 import { AuthService } from '../service/auth.service';
+import { AuthGuard } from '../../common/guards/auth.guard';
+import { ValidUser } from 'src/common/guards/valid-user.guard';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -12,4 +15,16 @@ export class AuthController {
         
         return this.authService.registerUser( userObject );
     }
+
+    //Comprobar si tenemos el token valido.
+    @Post('validate')
+    @UseGuards( AuthGuard, ValidUser )
+    validateToken( @Req() request: Request ) {
+        const user = request['user']
+        return {
+            usuario: user,
+            token: this.authService.signToken( user._id )
+        }
+    }
 }
+
