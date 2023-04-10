@@ -1,5 +1,5 @@
 import { InjectModel } from '@nestjs/mongoose'
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 
 import { User, UserDocument } from '../schemas/user.schema';

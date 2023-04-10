@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { authConstants } from './auth/constants';
+import { ProyectosModule } from './proyectos/proyectos.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { authConstants } from './auth/constants';
       global: true,
       secret: authConstants.secret,
       signOptions: { expiresIn: "24h" }
-    })
+    }),
+    ProyectosModule
   ],
   controllers: [AppController],
   providers: [AppService],
