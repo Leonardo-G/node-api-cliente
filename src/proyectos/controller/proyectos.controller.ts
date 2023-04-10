@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ProyectoNuevoDTO } from '../dto/proyecto.dto';
 import { ProyectosService } from '../services/proyectos.service';
 import { AuthGuard } from 'src/common/guards/auth.guard';
@@ -12,8 +12,19 @@ export class ProyectosController {
 
     @Post()
     @UseGuards( AuthGuard )
-    crearProyecto( @Body() proyecto: ProyectoNuevoDTO, @Req() { user }: Request & AuthUser){
+    crearProyecto( 
+        @Body() proyecto: ProyectoNuevoDTO, 
+        @Req() { user }: Request & AuthUser
+    ){
         console.log(proyecto)
         return this.proyectosServices.crearProyecto( proyecto, user.usuario._id );
+    }
+
+    //Obtenemos todos los proyectos del 
+    //usuario que mandamos obtenemos del token
+    @Get()
+    @UseGuards( AuthGuard )
+    obtenerProyectosDelUsuario( @Req() { user }: Request & AuthUser ){
+        return this.proyectosServices.obtenerProyectos( user.usuario._id );
     }
 }

@@ -18,4 +18,11 @@ export class ProyectosService {
         await proyecto.save()
         return proyecto;
     }
+
+    //Obtner todos los proyecto del usuario
+    async obtenerProyectos( idUser: string ): Promise<ProyectoDocument[]> {
+        const proyecto = await this.proyectoModel.find({ creador: idUser });
+
+        return proyecto
+    }
 }
