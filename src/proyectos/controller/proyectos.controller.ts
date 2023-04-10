@@ -60,5 +60,5 @@ export class ProyectosController {
             msg: await this.proyectosServices.eliminarProyecto( id )
         }
     }
-
+    
 }
