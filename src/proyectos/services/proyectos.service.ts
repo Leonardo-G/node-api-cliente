@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Proyecto, ProyectoDocument } from '../schema/proyecto.schema';
 import { Model } from 'mongoose';
@@ -33,6 +33,22 @@ export class ProyectosService {
             { new: true }               //Devolver el objeto actualizado
         ).select("-__v")
 
+        return proyecto
+    }
+
+    async eliminarProyecto( idProyecto: string ): Promise<string>{
+        const exist = await this.proyectoExiste( idProyecto );
+        if ( !exist ) throw new NotFoundException(`No se encontro el proyecto con el id: ${ idProyecto }`);
+
+        await this.proyectoModel.findOneAndRemove({ 
+            _id: idProyecto
+        }).exec();
+
+        return "Proyecto eliminado";
+    }
+    
+    async proyectoExiste( id: string ){
+        const proyecto = await this.proyectoModel.exists({ _id: id }).exec();
         return proyecto
     }
 }

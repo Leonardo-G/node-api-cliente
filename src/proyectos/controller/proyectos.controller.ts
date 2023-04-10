@@ -1,6 +1,7 @@
 import { 
     Body, 
     Controller, 
+    Delete, 
     Get, 
     NotFoundException, 
     Param, 
@@ -43,11 +44,21 @@ export class ProyectosController {
     actualizarProyecto( 
         @Param("id", MongoIdValidationPipe) id: string,
         @Body() proyectoObject: ProyectoNuevoDTO, 
-        @Req() { user }: Request & AuthUser 
+        @Req() { user }: Request & AuthUser
     ){
         const proyecto = this.proyectosServices.actualizarProyecto( proyectoObject, user.usuario._id, id );
         if ( !proyecto ) throw new NotFoundException(`No se encuentra el proyecto ${ id }`) 
         
         return proyecto
     }
+
+    @Delete(":id")
+    async eliminarProyecto(
+        @Param("id", MongoIdValidationPipe) id: string
+    ){
+        return {
+            msg: await this.proyectosServices.eliminarProyecto( id )
+        }
+    }
+
 }
