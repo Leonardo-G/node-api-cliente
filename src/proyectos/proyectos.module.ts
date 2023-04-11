@@ -14,6 +14,7 @@ import { Proyecto, ProyectoSchema } from './schema/proyecto.schema';
     ])
   ],
   controllers: [ProyectosController],
-  providers: [ProyectosService]
+  providers: [ProyectosService],
+  exports: [ ProyectosService ]
 })
 export class ProyectosModule {}

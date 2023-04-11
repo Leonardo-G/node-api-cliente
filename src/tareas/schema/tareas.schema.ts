@@ -1,10 +1,11 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, SchemaFactory, Schema as SchemaDecorator } from "@nestjs/mongoose";
 import { Document, HydratedDocument, Schema } from "mongoose";
 
 import { Proyecto } from "src/proyectos/schema/proyecto.schema";
 
 export type TareaDocument = HydratedDocument<Tarea>;
 
+@SchemaDecorator()
 export class Tarea extends Document {
     @Prop({
         type: String,

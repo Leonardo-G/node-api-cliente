@@ -15,7 +15,7 @@ export class ProyectosService {
             creador: idUser
         })
         
-        await proyecto.save()
+        await proyecto.save();
         return proyecto;
     }
 
