@@ -37,10 +37,16 @@ export class TareasService {
             { proyecto: proyectoId, _id: tareaId },
             { $set: tareaObject },
             { new: true }
-        )
-
+        ).select("-__v").exec()
         return tarea;
     }
  
+    async eliminarTarea (
+        tareaId: string
+    ) {
+        await this.tareaModel.findByIdAndRemove( tareaId )
+        
+        return "Tarea Eliminado";
+    }
 
 }

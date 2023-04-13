@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Proyecto, ProyectoDocument } from '../schema/proyecto.schema';
 import { Model } from 'mongoose';
@@ -48,7 +48,12 @@ export class ProyectosService {
     }
     
     async proyectoExiste( id: string ){
-        const proyecto = await this.proyectoModel.exists({ _id: id }).exec();
-        return proyecto
+        try {
+            const proyecto = await this.proyectoModel.exists({ _id: id });
+            return proyecto
+        } catch (error) {
+            console.log(error)
+            throw new BadRequestException(`No se encuentra el proyecto con el ID: ${ id }`);        
+        }
     }
 }

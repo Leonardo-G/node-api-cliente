@@ -1,8 +1,21 @@
-import { Body, Controller, HttpException, Param, Post, UseGuards, Get, Put } from '@nestjs/common';
+import { 
+    Body, 
+    Controller, 
+    HttpException, 
+    Param, 
+    Post, 
+    UseGuards, 
+    Get, 
+    Put, 
+    Delete
+} from '@nestjs/common';
+
 import { TareasService } from '../services/tareas.service';
 import { ProyectoExistsGuard } from '../guard/proyecto-exist.guard';
-import { AuthGuard } from 'src/common/guards/auth.guard';
 import { TareaNuevaDTO } from '../dto/tarea.dto';
+import { TareaIdValidatePipe } from '../pipes/tarea-id-validate.pipe';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { MongoIdValidationPipe } from 'src/common/pipes/mongo-id-validation.pipe';
 
 @Controller('proyectos/:proyectoId/tareas')
 @UseGuards( ProyectoExistsGuard, AuthGuard )
@@ -10,12 +23,12 @@ export class TareasController {
     constructor( private tareasService: TareasService ) {}
 
     @Post()
-    nuevaTarea( 
-        @Param("proyectoId") proyectoId: string, 
+    async nuevaTarea( 
+        @Param("proyectoId", MongoIdValidationPipe) proyectoId: string, 
         @Body() tarea: TareaNuevaDTO
     ){
         try {
-            return this.tareasService.crearTarea( tarea, proyectoId );
+            return await this.tareasService.crearTarea( tarea, proyectoId );
         } catch (error) {
             throw new HttpException(error.message, error.status);
         }
@@ -32,12 +45,27 @@ export class TareasController {
 
     @Put(':tareaId')
     actualizarTarea( 
+        @Body() tarea: TareaNuevaDTO,
         @Param("proyectoId") proyectoId: string, 
-        @Param("tareaId") tareaId: string, 
-        @Body() tarea: TareaNuevaDTO 
+        @Param("tareaId", MongoIdValidationPipe, TareaIdValidatePipe) tareaId: string, 
     ) {
         try {
             return this.tareasService.actualizarTarea( tarea, proyectoId, tareaId );
+        } catch (error) {
+            throw new HttpException(error.message, error.status);
+        }
+    }
+
+    @Delete(':tareaId')
+    async eliminarTarea(
+        @Param("tareaId", MongoIdValidationPipe, TareaIdValidatePipe) tareaId: string,
+    ) {
+        try {
+            const msg = await this.tareasService.eliminarTarea( tareaId );
+
+            return {
+               msg
+            }
         } catch (error) {
             throw new HttpException(error.message, error.status);
         }

@@ -10,6 +10,7 @@ export class ProyectoExistsGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const proyectoId = request.params.proyectoId;
         const proyecto = await this.proyectosService.proyectoExiste( proyectoId );
+        console.log(proyecto)
 
         if ( !proyecto ) {
             throw new NotFoundException(`No existe el proyecto con el id ${ proyectoId }`);
