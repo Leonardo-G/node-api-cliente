@@ -26,7 +26,7 @@ export class ProyectosService {
         return proyecto
     }
 
-    async actualizarProyecto( proyectoObject: ProyectoNuevoDTO, idUser: string, idProyecto ): Promise<ProyectoDocument> {
+    async actualizarProyecto( proyectoObject: ProyectoNuevoDTO, idUser: string, idProyecto: string ): Promise<ProyectoDocument> {
         const proyecto = await this.proyectoModel.findOneAndUpdate(
             { creador: idUser, _id: idProyecto },        //Filtro de busqueda
             { $set: proyectoObject },   //Actualizar el proyecto en la DB

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Tarea, TareaDocument } from '../schema/tareas.schema';
 import { Model } from 'mongoose';
+
+import { Tarea, TareaDocument } from '../schema/tareas.schema';
 import { TareaNuevaDTO } from '../dto/tarea.dto';
 
 @Injectable()
@@ -18,4 +19,28 @@ export class TareasService {
 
         return tarea;
     }
+
+    async obtenerTareas( proyectoId: string ): Promise<TareaDocument[]> {
+        const tareas = await this.tareaModel.find({
+            proyecto: proyectoId
+        })
+
+        return tareas;
+    }
+
+    async actualizarTarea( 
+        tareaObject: TareaNuevaDTO, 
+        proyectoId: string,
+        tareaId: string    
+    ): Promise<TareaDocument> {
+        const tarea = await this.tareaModel.findOneAndUpdate(
+            { proyecto: proyectoId, _id: tareaId },
+            { $set: tareaObject },
+            { new: true }
+        )
+
+        return tarea;
+    }
+ 
+
 }
