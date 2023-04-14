@@ -49,4 +49,10 @@ export class TareasService {
         return "Tarea Eliminado";
     }
 
+    async tareaExists ( id: string ): Promise<TareaDocument | null> {
+        const tarea = await this.tareaModel.findById( id );
+        
+        return tarea;
+    }
+
 }
