@@ -40,3 +40,4 @@ lerna-debug.log*
 # Spacefile
 Spacefile
 .space
+.deta/cors.json

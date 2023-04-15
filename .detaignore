@@ -1,3 +1,5 @@
 !Spacefile
 
 !dist/**
+
+!.deta/cors.json
