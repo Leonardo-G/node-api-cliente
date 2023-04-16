@@ -24,7 +24,7 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 import { TareasService } from '../services/tareas.service';
-import { TareaNuevaDTO } from '../dto/tarea.dto';
+import { TareaActualDTO, TareaNuevaDTO } from '../dto/tarea.dto';
 export declare class TareasController {
     private tareasService;
     constructor(tareasService: TareasService);
@@ -34,7 +34,7 @@ export declare class TareasController {
     obtenerTareas(proyectoId: string): Promise<(import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {
         _id: import("mongoose").Types.ObjectId;
     }, never>)[]>;
-    actualizarTarea(tarea: TareaNuevaDTO, proyectoId: string, tareaId: string): Promise<import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {
+    actualizarTarea(tarea: TareaActualDTO, proyectoId: string, tareaId: string): Promise<import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;
     eliminarTarea(tareaId: string): Promise<{

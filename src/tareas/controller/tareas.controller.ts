@@ -14,7 +14,7 @@ import { TareasService } from '../services/tareas.service';
 import { ProyectoExistsGuard } from '../guard/proyecto-exist.guard';
 import { TareaExistGuard } from '../guard/tarea-exist.guard';
 
-import { TareaNuevaDTO } from '../dto/tarea.dto';
+import { TareaActualDTO, TareaNuevaDTO } from '../dto/tarea.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('proyectos/:proyectoId/tareas')
@@ -46,7 +46,7 @@ export class TareasController {
     @Put(':tareaId')
     @UseGuards( TareaExistGuard )
     actualizarTarea( 
-        @Body() tarea: TareaNuevaDTO,
+        @Body() tarea: TareaActualDTO,
         @Param("proyectoId") proyectoId: string, 
         @Param("tareaId") tareaId: string, 
     ) {

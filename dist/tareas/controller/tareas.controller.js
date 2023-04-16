@@ -81,7 +81,7 @@ __decorate([
     __param(1, (0, common_1.Param)("proyectoId")),
     __param(2, (0, common_1.Param)("tareaId")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [tarea_dto_1.TareaNuevaDTO, String, String]),
+    __metadata("design:paramtypes", [tarea_dto_1.TareaActualDTO, String, String]),
     __metadata("design:returntype", void 0)
 ], TareasController.prototype, "actualizarTarea", null);
 __decorate([
