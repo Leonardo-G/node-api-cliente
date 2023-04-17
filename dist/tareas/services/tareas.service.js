@@ -32,7 +32,7 @@ let TareasService = class TareasService {
     async obtenerTareas(proyectoId) {
         const tareas = await this.tareaModel.find({
             proyecto: proyectoId
-        });
+        }).select('-__v').exec();
         return tareas;
     }
     async actualizarTarea(tareaObject, proyectoId, tareaId) {

@@ -10,21 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserLoginDTO = exports.RegisterClassDTO = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class RegisterClassDTO {
 }
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MinLength)(3),
     __metadata("design:type", String)
 ], RegisterClassDTO.prototype, "nombre", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        required: true
+    }),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RegisterClassDTO.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MinLength)(6),
@@ -34,11 +44,17 @@ exports.RegisterClassDTO = RegisterClassDTO;
 class UserLoginDTO {
 }
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        required: true
+    }),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], UserLoginDTO.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MinLength)(6),

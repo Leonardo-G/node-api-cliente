@@ -9,39 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TareaActualDTO = exports.TareaNuevaDTO = void 0;
+exports.ProyectosReturnDTO = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-class TareaNuevaDTO {
+const mongoose_1 = require("mongoose");
+class ProyectosReturnDTO {
 }
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: String,
+        example: "61b048ed7d973b6a5f515b36",
+        description: "ID del proyecto"
     }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(3),
-    __metadata("design:type", String)
-], TareaNuevaDTO.prototype, "nombre", void 0);
-exports.TareaNuevaDTO = TareaNuevaDTO;
-class TareaActualDTO {
-}
+    __metadata("design:type", mongoose_1.Types.ObjectId)
+], ProyectosReturnDTO.prototype, "_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: String,
+        example: "Proyecto Nuevo",
+        description: "Nombre del proyecto"
     }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(3),
     __metadata("design:type", String)
-], TareaActualDTO.prototype, "nombre", void 0);
+], ProyectosReturnDTO.prototype, "nombre", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: 'objectId',
+        example: "61b8364658300d6dc34c2bbd",
+        description: "ID del usuario"
     }),
-    (0, class_validator_1.IsBoolean)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Boolean)
-], TareaActualDTO.prototype, "estado", void 0);
-exports.TareaActualDTO = TareaActualDTO;
-//# sourceMappingURL=tarea.dto.js.map
+    __metadata("design:type", mongoose_1.Types.ObjectId)
+], ProyectosReturnDTO.prototype, "creador", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: "2021-12-14T05:57:57.321+00:00",
+        description: "fecha de la creación de proyecto"
+    }),
+    __metadata("design:type", Date)
+], ProyectosReturnDTO.prototype, "creado", void 0);
+exports.ProyectosReturnDTO = ProyectosReturnDTO;
+//# sourceMappingURL=proyecto-return.dto.js.map

@@ -28,7 +28,7 @@ import { TareaActualDTO, TareaNuevaDTO } from '../dto/tarea.dto';
 export declare class TareasController {
     private tareasService;
     constructor(tareasService: TareasService);
-    nuevaTarea(proyectoId: string, tarea: TareaNuevaDTO): Promise<import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {
+    nuevaTarea(tarea: TareaNuevaDTO, proyectoId: string): Promise<import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;
     obtenerTareas(proyectoId: string): Promise<(import("mongoose").Document<unknown, {}, import("../schema/tareas.schema").Tarea> & Omit<import("../schema/tareas.schema").Tarea & {

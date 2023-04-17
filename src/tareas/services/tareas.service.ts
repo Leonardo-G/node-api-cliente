@@ -23,7 +23,7 @@ export class TareasService {
     async obtenerTareas( proyectoId: string ): Promise<TareaDocument[]> {
         const tareas = await this.tareaModel.find({
             proyecto: proyectoId
-        })
+        }).select('-__v').exec();
 
         return tareas;
     }
@@ -37,14 +37,14 @@ export class TareasService {
             { proyecto: proyectoId, _id: tareaId },
             { $set: tareaObject },
             { new: true }
-        ).select("-__v").exec()
+        ).select("-__v").exec();
         return tarea;
     }
  
     async eliminarTarea (
         tareaId: string
     ) {
-        await this.tareaModel.findByIdAndRemove( tareaId )
+        await this.tareaModel.findByIdAndRemove( tareaId );
         
         return "Tarea Eliminado";
     }

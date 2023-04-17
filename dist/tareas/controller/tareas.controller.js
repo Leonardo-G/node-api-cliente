@@ -19,11 +19,13 @@ const proyecto_exist_guard_1 = require("../guard/proyecto-exist.guard");
 const tarea_exist_guard_1 = require("../guard/tarea-exist.guard");
 const tarea_dto_1 = require("../dto/tarea.dto");
 const auth_guard_1 = require("../../common/guards/auth.guard");
+const swagger_1 = require("@nestjs/swagger");
+const tarea_return_dto_1 = require("../dto/tarea-return.dto");
 let TareasController = class TareasController {
     constructor(tareasService) {
         this.tareasService = tareasService;
     }
-    async nuevaTarea(proyectoId, tarea) {
+    async nuevaTarea(tarea, proyectoId) {
         try {
             return await this.tareasService.crearTarea(tarea, proyectoId);
         }
@@ -61,14 +63,30 @@ let TareasController = class TareasController {
 };
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Param)("proyectoId")),
-    __param(1, (0, common_1.Body)()),
+    (0, swagger_1.ApiParam)({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        type: tarea_return_dto_1.TareaReturnDTO
+    }),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)("proyectoId")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, tarea_dto_1.TareaNuevaDTO]),
+    __metadata("design:paramtypes", [tarea_dto_1.TareaNuevaDTO, String]),
     __metadata("design:returntype", Promise)
 ], TareasController.prototype, "nuevaTarea", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiParam)({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        type: [tarea_return_dto_1.TareaReturnDTO]
+    }),
     __param(0, (0, common_1.Param)("proyectoId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -76,6 +94,18 @@ __decorate([
 ], TareasController.prototype, "obtenerTareas", null);
 __decorate([
     (0, common_1.Put)(':tareaId'),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        type: tarea_return_dto_1.TareaReturnDTO
+    }),
+    (0, swagger_1.ApiParam)({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    }),
+    (0, swagger_1.ApiParam)({
+        name: 'tareaId',
+        description: "Id de la tarea a actualizar"
+    }),
     (0, common_1.UseGuards)(tarea_exist_guard_1.TareaExistGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)("proyectoId")),
@@ -86,6 +116,14 @@ __decorate([
 ], TareasController.prototype, "actualizarTarea", null);
 __decorate([
     (0, common_1.Delete)(':tareaId'),
+    (0, swagger_1.ApiParam)({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    }),
+    (0, swagger_1.ApiParam)({
+        name: 'proyectoId',
+        description: "Id de la tarea a eliminar"
+    }),
     (0, common_1.UseGuards)(tarea_exist_guard_1.TareaExistGuard),
     __param(0, (0, common_1.Param)("tareaId")),
     __metadata("design:type", Function),
@@ -93,6 +131,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TareasController.prototype, "eliminarTarea", null);
 TareasController = __decorate([
+    (0, swagger_1.ApiTags)('Tareas'),
     (0, common_1.Controller)('proyectos/:proyectoId/tareas'),
     (0, common_1.UseGuards)(proyecto_exist_guard_1.ProyectoExistsGuard, auth_guard_1.AuthGuard),
     __metadata("design:paramtypes", [tareas_service_1.TareasService])

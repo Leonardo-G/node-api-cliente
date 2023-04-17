@@ -16,16 +16,27 @@ import { TareaExistGuard } from '../guard/tarea-exist.guard';
 
 import { TareaActualDTO, TareaNuevaDTO } from '../dto/tarea.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { TareaReturnDTO } from '../dto/tarea-return.dto';
 
+@ApiTags('Tareas')
 @Controller('proyectos/:proyectoId/tareas')
 @UseGuards( ProyectoExistsGuard, AuthGuard )
 export class TareasController {
     constructor( private tareasService: TareasService ) {}
 
     @Post()
+    @ApiParam({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    })
+    @ApiResponse({ 
+        status: 201,
+        type: TareaReturnDTO
+    })
     async nuevaTarea( 
-        @Param("proyectoId") proyectoId: string, 
-        @Body() tarea: TareaNuevaDTO
+        @Body() tarea: TareaNuevaDTO,
+        @Param("proyectoId") proyectoId: string
     ){
         try {
             return await this.tareasService.crearTarea( tarea, proyectoId );
@@ -35,6 +46,14 @@ export class TareasController {
     }
 
     @Get()
+    @ApiParam({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    })    
+    @ApiResponse({ 
+        status: 200,
+        type: [TareaReturnDTO]
+    })
     obtenerTareas( @Param("proyectoId") proyectoId: string ) {
         try {
             return this.tareasService.obtenerTareas( proyectoId );
@@ -44,6 +63,18 @@ export class TareasController {
     }
 
     @Put(':tareaId')
+    @ApiResponse({ 
+        status: 200,
+        type: TareaReturnDTO
+    })
+    @ApiParam({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    })
+    @ApiParam({
+        name: 'tareaId',
+        description: "Id de la tarea a actualizar"
+    })
     @UseGuards( TareaExistGuard )
     actualizarTarea( 
         @Body() tarea: TareaActualDTO,
@@ -58,6 +89,14 @@ export class TareasController {
     }
 
     @Delete(':tareaId')
+    @ApiParam({
+        name: 'proyectoId',
+        description: "Id del proyecto que contiene las tareas"
+    })
+    @ApiParam({
+        name: 'proyectoId',
+        description: "Id de la tarea a eliminar"
+    })
     @UseGuards( TareaExistGuard )
     async eliminarTarea(
         @Param("tareaId") tareaId: string,

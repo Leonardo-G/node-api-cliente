@@ -18,6 +18,8 @@ const auth_dto_1 = require("../dto/auth.dto");
 const auth_service_1 = require("../service/auth.service");
 const auth_guard_1 = require("../../common/guards/auth.guard");
 const valid_user_guard_1 = require("../../common/guards/valid-user.guard");
+const swagger_1 = require("@nestjs/swagger");
+const auth_return_dto_1 = require("../dto/auth-return.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -38,6 +40,10 @@ let AuthController = class AuthController {
 };
 __decorate([
     (0, common_1.Post)('register'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        type: auth_return_dto_1.TokenDTO
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [auth_dto_1.RegisterClassDTO]),
@@ -45,6 +51,10 @@ __decorate([
 ], AuthController.prototype, "registerUser", null);
 __decorate([
     (0, common_1.Post)('validate'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        type: auth_return_dto_1.AuthReturnDTO
+    }),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, valid_user_guard_1.ValidUser),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -53,12 +63,17 @@ __decorate([
 ], AuthController.prototype, "validateToken", null);
 __decorate([
     (0, common_1.Post)('login'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        type: auth_return_dto_1.AuthReturnDTO
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [auth_dto_1.UserLoginDTO]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "loginUser", null);
 AuthController = __decorate([
+    (0, swagger_1.ApiTags)('Auth'),
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);

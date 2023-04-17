@@ -9,39 +9,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TareaActualDTO = exports.TareaNuevaDTO = void 0;
+exports.TareaReturnDTO = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-class TareaNuevaDTO {
+const mongoose_1 = require("mongoose");
+class TareaReturnDTO {
 }
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: mongoose_1.Types.ObjectId,
+        format: 'objectId',
+        example: '61b7e0a13f31b25b6291137a',
+        description: 'ID tipo Mongo de la tarea'
     }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(3),
-    __metadata("design:type", String)
-], TareaNuevaDTO.prototype, "nombre", void 0);
-exports.TareaNuevaDTO = TareaNuevaDTO;
-class TareaActualDTO {
-}
+    __metadata("design:type", mongoose_1.Types.ObjectId)
+], TareaReturnDTO.prototype, "_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: String,
+        example: 'Tarea nueva',
+        description: 'Nombre de la tarea'
     }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(3),
     __metadata("design:type", String)
-], TareaActualDTO.prototype, "nombre", void 0);
+], TareaReturnDTO.prototype, "nombre", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        required: true
+        type: Date,
+        example: '2021-12-14T00:00:51.133+00:00',
+        description: 'Fecha de la creación de la tarea'
     }),
-    (0, class_validator_1.IsBoolean)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Boolean)
-], TareaActualDTO.prototype, "estado", void 0);
-exports.TareaActualDTO = TareaActualDTO;
-//# sourceMappingURL=tarea.dto.js.map
+    __metadata("design:type", Date)
+], TareaReturnDTO.prototype, "creado", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '61b6dafbcbb50c4d8f74a629',
+        description: 'Id del proyecto que contiene la tarea'
+    }),
+    __metadata("design:type", mongoose_1.Types.ObjectId)
+], TareaReturnDTO.prototype, "proyecto", void 0);
+exports.TareaReturnDTO = TareaReturnDTO;
+//# sourceMappingURL=tarea-return.dto.js.map

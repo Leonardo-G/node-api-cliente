@@ -21,10 +21,10 @@ async function bootstrap() {
         .setTitle('API administrador')
         .setDescription('API para administrador de tareas')
         .setVersion('2.0')
-        .addTag('cats')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup("docs", app, document);
+    const swaggerCustomOptions = { customCss: '.swagger-ui section.models { display: none;}' };
+    swagger_1.SwaggerModule.setup("docs", app, document, swaggerCustomOptions);
     app.enableCors();
     await app.listen(process.env.PORT || 8000);
 }
